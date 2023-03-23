@@ -1,0 +1,41 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url = uri("https://repo1.maven.org/maven2/")
+    }
+    maven {
+        url = uri("https://maven.aliyun.com/repository/central/")
+    }
+    maven {
+        url = uri("https://repo.maven.apache.org/maven2/")
+    }
+    ivy {
+        setUrl("https://download.eclipse.org/tools/cdt/releases/11.0/cdt-11.0.0/plugins")
+        metadataSources {
+            artifact()
+        }
+        patternLayout {
+            artifact("/[organisation].[module]_[revision].[ext]")
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation("de.fraunhofer.aisec:cpg-core:6.2.1")
+    implementation("de.fraunhofer.aisec:cpg-analysis:6.2.1")
+    implementation("commons-cli:commons-cli:1.4")
+}
+
+test {
+    useJUnitPlatform()
+}
